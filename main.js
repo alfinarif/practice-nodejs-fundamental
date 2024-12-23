@@ -1,23 +1,20 @@
 // import module to create server
 const http = require("http");
+const url = require('url'); // import URL module
 
 const server = http.createServer(function(req, res){
 
-    if (req.url == "/"){
-        res.writeHead(200, {"Content-Type": "Alfin Arif"});
-        res.write("<h1>This is Home Page From NodeJs Server!</h1>");
-        res.end();
-    }
-    else if (req.url == "/about"){
-        res.writeHead(200, {"Content-Type": "Alfin Arif"});
-        res.write("<h1>This is About Page From NodeJs Server!</h1>");
-        res.end();
-    }
-    else if (req.url == "/contact"){
-        res.writeHead(200, {"Content-Type": "Alfin Arif"});
-        res.write("<h1>This is Contact Page From NodeJs Server!</h1>");
-        res.end();
-    }
+    let myUrl = "https://rabbil.com/blog.html?year=2024&month=july";
+    let myUrlObject = url.parse(myUrl, true); // break the URL using parse() method;
+
+    // URL MODULE
+    let myHostName = myUrlObject.host;
+    let myPathName = myUrlObject.pathname;
+    let mySearch = myUrlObject.search;
+
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(mySearch);
+    res.end();
 
 });
 
